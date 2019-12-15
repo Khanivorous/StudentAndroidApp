@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
 jobs:
   build:
     working_directory: ~/code
@@ -25,9 +27,11 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Unit Tests
-          command: ./gradlew testDebugUnitTest
+          command: ./gradlew testDebugUnitTest jacocoTestReport
       - store_test_results:
           path: app/build/test-results
+      - codecov/upload:
+          file: app/build/reports/jacoco/jacocoTestReport/*.xml
       - run:
           name: Build and acrhcive APK
           command: ./gradlew assembleDebug
