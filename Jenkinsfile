@@ -9,13 +9,13 @@ pipeline {
     stage('Unit test') {
       steps {
         sh './gradlew testDebugUnitTest'
-        junit '**/TEST-*.xml'
+        junit 'app/build/test-results/testDebugUnitTest/TEST-*.xml'
       }
     }
     stage('Build APK') {
       steps {
         sh './gradlew assembleDebug'
-        archiveArtifacts '**/*.apk'
+        archiveArtifacts 'app/build/outputs/apk/debug/*.apk'
       }
     }
     stage('email results') {
