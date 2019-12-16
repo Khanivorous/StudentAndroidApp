@@ -1,3 +1,9 @@
 package com.example.studentandroidapp.models
 
-data class Student(var id: Int, var name: String, var age: Int)
+import com.google.gson.annotations.SerializedName
+
+data class Student(
+    @SerializedName("id") var id: Int,
+    @SerializedName("name") var name: String,
+    @SerializedName("age") var age: Int
+)
