@@ -6,7 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import android.widget.TextView
+import com.example.studentandroidapp.network.StudentRestApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -25,8 +31,27 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment("From FirstFragment")
-            findNavController().navigate(action)
+            displayStudentName()
+        }
+    }
+
+    private fun displayStudentName() {
+        val service = StudentRestApi.createRetrofitService()
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.getStudentById("1")
+            withContext(Dispatchers.Main) {
+                try {
+                    if (response.isSuccessful) {
+                        view?.findViewById<TextView>(R.id.textview_first)?.text=response.body().toString()
+                    } else {
+                        view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.fuck_it)
+                    }
+                } catch (e: HttpException) {
+                    view?.findViewById<TextView>(R.id.textview_first)?.text=e.message
+                } catch (e: Throwable) {
+                    view?.findViewById<TextView>(R.id.textview_first)?.text=e.message
+                }
+            }
         }
     }
 }
