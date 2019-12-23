@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.studentandroidapp.models.Student
 import com.example.studentandroidapp.network.StudentRestApi
 import io.reactivex.schedulers.Schedulers
@@ -34,10 +35,13 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-                //displayStudentName()
-            displayrxStudentName()
+        view.findViewById<Button>(R.id.button_next).setOnClickListener {
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment("From FirstFragment")
+            findNavController().navigate(action)
+        }
 
+        view.findViewById<Button>(R.id.button_get_student_id_one).setOnClickListener {
+            displayrxStudentName()
         }
     }
 
@@ -46,10 +50,7 @@ class FirstFragment : Fragment() {
         myCompositeDisposable?.add(service.getStudentByRxId("1")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { student -> this.handleRxResults(student) },
-                {t -> this.handleRxError(t) }
-            ))
+            .subscribe ({ student -> this.handleRxResults(student) },{ t -> this.handleRxError(t) }))
     }
 
     private fun handleRxResults(student: Student) {
@@ -58,26 +59,6 @@ class FirstFragment : Fragment() {
 
     private fun handleRxError(t: Throwable) {
         view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
-    }
-
-    private fun displayStudentName() {
-        val service = StudentRestApi.createRetrofitService()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getStudentById("1")
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response.isSuccessful) {
-                        view?.findViewById<TextView>(R.id.textview_first)?.text=response.body().toString()
-                    } else {
-                        view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
-                    }
-                } catch (e: HttpException) {
-                    view?.findViewById<TextView>(R.id.textview_first)?.text=e.message
-                } catch (e: Throwable) {
-                    view?.findViewById<TextView>(R.id.textview_first)?.text=e.message
-                }
-            }
-        }
     }
 
     override fun onDestroy() {
