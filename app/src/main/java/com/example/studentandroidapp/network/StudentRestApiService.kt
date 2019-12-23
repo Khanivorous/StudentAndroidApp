@@ -15,4 +15,7 @@ interface StudentRestApiService {
     @GET("students")
     suspend fun getAllStudents(): Response<List<Student>>
 
+    @GET("students/{id}")
+    fun getStudentByRxId(@Path("id") path: String): Single<Student>
+
 }
