@@ -57,7 +57,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun handleRxError(t: Throwable) {
-        view?.findViewById<TextView>(R.id.textview_first)?.text=t.message
+        view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
     }
 
     private fun displayStudentName() {
@@ -69,7 +69,7 @@ class FirstFragment : Fragment() {
                     if (response.isSuccessful) {
                         view?.findViewById<TextView>(R.id.textview_first)?.text=response.body().toString()
                     } else {
-                        view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.fuck_it)
+                        view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
                     }
                 } catch (e: HttpException) {
                     view?.findViewById<TextView>(R.id.textview_first)?.text=e.message
