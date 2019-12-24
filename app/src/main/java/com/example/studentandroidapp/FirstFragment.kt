@@ -11,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.studentandroidapp.models.Student
 import com.example.studentandroidapp.network.StudentRestApi
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.*
-import retrofit2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
