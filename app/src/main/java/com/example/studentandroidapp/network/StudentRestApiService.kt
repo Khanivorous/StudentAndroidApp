@@ -8,13 +8,13 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface StudentRestApiService {
-
+    //Get method for coroutines
     @GET("students/{id}")
     suspend fun getStudentById(@Path("id") path: String): Response<Student>
-
+    //Get method for coroutines
     @GET("students")
     suspend fun getAllStudents(): Response<List<Student>>
-
+    //Get method for RxJava
     @GET("students/{id}")
     fun getStudentByRxId(@Path("id") path: String): Single<Student>
 
