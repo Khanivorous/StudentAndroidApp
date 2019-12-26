@@ -47,14 +47,16 @@ class SecondFragment : Fragment() {
 
     private fun displayStudentName() {
         val service = StudentRestApi.createRetrofitService()
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             try {
-                val response = service.getStudentById("1")
-                withContext(Dispatchers.Main) { if (response.isSuccessful){view?.findViewById<TextView>(R.id.textview_second)?.text =
-                    response.body().toString()} }
+                val response = withContext(Dispatchers.IO) {
+                    service.getStudentById("1")
+                }
+                view?.findViewById<TextView>(R.id.textview_second)?.text=response.body().toString()
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) {view?.findViewById<TextView>(R.id.textview_second)?.text=getString(R.string.network_error)}
+                view?.findViewById<TextView>(R.id.textview_second)?.text=getString(R.string.network_error)
             }
         }
     }
 }
+
