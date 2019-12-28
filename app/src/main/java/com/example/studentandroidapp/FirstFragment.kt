@@ -13,6 +13,11 @@ import com.example.studentandroidapp.network.StudentRestApi
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -39,27 +44,30 @@ class FirstFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.button_get_student_id_one).setOnClickListener {
-            displayrxStudentName()
+            displayStudentName()
         }
     }
 
-    /**
-     * In this fragment I'm using RxJava to handle the network call
-     * @Todo Put this logic in a veiwModel
-     */
-    private fun displayrxStudentName() {
+    private fun displayStudentName() {
         val service = StudentRestApi.createRetrofitService()
-        myCompositeDisposable?.add(service.getStudentByRxId("1")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({ student -> this.handleRxResults(student) },{ t -> this.handleRxError(t) }))
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    service.getStudentById("1")
+                }
+                handleResults(response)
+            } catch (e: Exception) {
+                handleError(e)
+            }
+        }
     }
 
-    private fun handleRxResults(student: Student) {
-        view?.findViewById<TextView>(R.id.textview_first)?.text=student.name
+    private fun handleResults(student: Response<Student>) {
+        view?.findViewById<TextView>(R.id.textview_first)?.text= student.body()?.name
     }
 
-    private fun handleRxError(t: Throwable) {
+    private fun handleError(t: Throwable) {
+        println(t.message)
         view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
     }
 
