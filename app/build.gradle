@@ -100,10 +100,11 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
     implementation 'io.reactivex.rxjava2:rxjava:2.2.16'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
     //This enables the use of coroutines on the project
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutineVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineVersion}"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03"
 
     //Gson to serialize and deserialize objects from and to json
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -120,6 +121,7 @@ dependencies {
     //unit test dependencies including mockito
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-all:2.0.2-beta'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutineVersion}"
 
     //UI test dependencies including mockwebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
