@@ -8,6 +8,7 @@ def okHttpVersion = '4.2.2'
 def retrofitVersion = '2.6.2'
 def coroutineVersion = '1.3.2'
 def espressoVersion = '3.2.0'
+def lifecycle_version = '2.1.0'
 
 android {
     compileSdkVersion 29
@@ -105,7 +106,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutineVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineVersion}"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03"
+    //This is for viewmodel and livedata lifecycles
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     //Gson to serialize and deserialize objects from and to json
     implementation 'com.google.code.gson:gson:2.8.6'
