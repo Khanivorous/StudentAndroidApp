@@ -1,15 +1,19 @@
 package com.example.studentandroidapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.studentandroidapp.models.Student
 import com.example.studentandroidapp.network.StudentRestApi
+import com.example.studentandroidapp.viewmodels.FirstViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,14 +26,15 @@ import retrofit2.Response
  */
 class FirstFragment : Fragment() {
 
-    private var myCompositeDisposable: CompositeDisposable? = null
+    private lateinit var viewModel: FirstViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        myCompositeDisposable = CompositeDisposable()
+        Log.i("GameFragment", "Called ViewModelProviders.of")
+        viewModel = ViewModelProvider(this).get(FirstViewModel::class.java)
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 

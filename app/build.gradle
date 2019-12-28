@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco'
 
 def okHttpVersion = '4.2.2'
@@ -109,6 +110,7 @@ dependencies {
     //This is for viewmodel and livedata lifecycles
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     //Gson to serialize and deserialize objects from and to json
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -128,6 +130,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-all:2.0.2-beta'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutineVersion}"
+    //Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //UI test dependencies including mockwebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
