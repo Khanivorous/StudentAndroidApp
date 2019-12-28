@@ -42,16 +42,21 @@ class FirstFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.button_get_student_id_one).setOnClickListener {
-            displayStudentName()
+            displayStudentName("1")
         }
     }
 
-    private fun displayStudentName() {
+    /**
+     * In this fragment I'm experimenting with Coroutines to handle the network call
+     * @Todo Put this logic in a viewModel
+     */
+
+    private fun displayStudentName(id: String) {
         val service = StudentRestApi.createRetrofitService()
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    service.getStudentById("1")
+                    service.getStudentById(id)
                 }
                 handleResults(response)
             } catch (e: Exception) {

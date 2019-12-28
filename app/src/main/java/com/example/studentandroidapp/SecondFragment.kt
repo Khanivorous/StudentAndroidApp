@@ -9,11 +9,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.studentandroidapp.models.Student
 import com.example.studentandroidapp.network.StudentRestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -41,7 +43,7 @@ class SecondFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.button_get_student_id_one).setOnClickListener {
-            displayStudentName()
+            displayStudentName("2")
         }
     }
 
@@ -49,18 +51,27 @@ class SecondFragment : Fragment() {
      * In this fragment I'm experimenting with Coroutines to handle the network call
      * @Todo Put this logic in a viewModel
      */
-    private fun displayStudentName() {
+    private fun displayStudentName(id: String) {
         val service = StudentRestApi.createRetrofitService()
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    service.getStudentById("1")
+                    service.getStudentById(id)
                 }
-                view?.findViewById<TextView>(R.id.textview_second)?.text=response.body().toString()
+                handleResults(response)
             } catch (e: Exception) {
-                view?.findViewById<TextView>(R.id.textview_second)?.text=getString(R.string.network_error)
+                handleError(e)
             }
         }
+    }
+
+    private fun handleResults(student: Response<Student>) {
+        view?.findViewById<TextView>(R.id.textview_second)?.text= student.body()?.name
+    }
+
+    private fun handleError(t: Throwable) {
+        println(t.message)
+        view?.findViewById<TextView>(R.id.textview_second)?.text=getString(R.string.network_error)
     }
 }
 
