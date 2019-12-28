@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.studentandroidapp.models.Student
 import com.example.studentandroidapp.network.StudentRestApi
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -71,8 +69,4 @@ class FirstFragment : Fragment() {
         view?.findViewById<TextView>(R.id.textview_first)?.text=getString(R.string.network_error)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        myCompositeDisposable?.clear()
-    }
 }
