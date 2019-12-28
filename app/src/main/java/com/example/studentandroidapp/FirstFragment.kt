@@ -43,6 +43,10 @@ class FirstFragment : Fragment() {
         }
     }
 
+    /**
+     * In this fragment I'm using RxJava to handle the network call
+     * @Todo Put this logic in a veiwModel
+     */
     private fun displayrxStudentName() {
         val service = StudentRestApi.createRetrofitService()
         myCompositeDisposable?.add(service.getStudentByRxId("1")
