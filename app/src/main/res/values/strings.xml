@@ -9,4 +9,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="network_error">Oops, we have a network error</string>
+    <string name="GetStudentById1">Get Student 1</string>
+    <string name="GetStudentByIdCoRoutine">Get Student 1 co</string>
 </resources>

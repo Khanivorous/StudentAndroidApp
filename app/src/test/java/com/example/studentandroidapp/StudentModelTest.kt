@@ -1,6 +1,7 @@
 package com.example.studentandroidapp
 
 import com.example.studentandroidapp.models.Student
+import com.google.gson.Gson
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
@@ -8,6 +9,7 @@ class StudentModelTest {
 
     @Test
     fun testStudentModel() {
+
         val student = Student(1,"Barry",28)
 
         assertEquals(1,student.id)
@@ -27,5 +29,27 @@ class StudentModelTest {
         assertEquals(3,newStudent.id)
         assertEquals("Martha",newStudent.name)
         assertEquals(22,newStudent.age)
+    }
+
+    @Test
+    fun testStudentModelMappingToJson() {
+
+        val gson = Gson()
+        val student = Student(1,"Barry",28)
+        val json = gson.toJson(student)
+
+        assertEquals("""{"id":1,"name":"Barry","age":28}""",json)
+    }
+
+    @Test
+    fun testStudentModelMappingFromJson() {
+
+        val gson = Gson()
+        val jsonString = """{"id":2,"name":"Sheila","age":33}"""
+        val testStudentModel = gson.fromJson(jsonString, Student::class.java)
+
+        assertEquals(testStudentModel.id,2)
+        assertEquals(testStudentModel.name,"Sheila")
+        assertEquals(testStudentModel.age,33)
     }
 }
