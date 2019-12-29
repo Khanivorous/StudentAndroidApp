@@ -2,12 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco'
 
 def okHttpVersion = '4.2.2'
 def retrofitVersion = '2.6.2'
 def coroutineVersion = '1.3.2'
 def espressoVersion = '3.2.0'
+def lifecycle_version = '2.2.0-rc03'
 
 android {
     compileSdkVersion 29
@@ -105,7 +107,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutineVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineVersion}"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03"
+    //This is for viewmodel and livedata lifecycles
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     //Gson to serialize and deserialize objects from and to json
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -125,6 +130,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-all:2.0.2-beta'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutineVersion}"
+    //Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //UI test dependencies including mockwebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
