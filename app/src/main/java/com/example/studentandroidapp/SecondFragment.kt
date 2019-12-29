@@ -49,7 +49,7 @@ class SecondFragment : Fragment() {
 
     /**
      * In this fragment I'm experimenting with Coroutines to handle the network call
-     * @Todo Put this logic in a viewModel
+     * @Todo Write UI tests
      */
     private fun displayStudentName(id: String) {
         val service = StudentRestApi.createRetrofitService()
