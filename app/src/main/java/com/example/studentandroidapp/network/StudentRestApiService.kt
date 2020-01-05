@@ -1,6 +1,6 @@
 package com.example.studentandroidapp.network
 
-import com.example.studentandroidapp.models.Student
+import com.example.studentandroidapp.datamodels.Student
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

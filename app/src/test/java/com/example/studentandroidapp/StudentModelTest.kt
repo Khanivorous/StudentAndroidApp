@@ -1,6 +1,6 @@
 package com.example.studentandroidapp
 
-import com.example.studentandroidapp.models.Student
+import com.example.studentandroidapp.datamodels.Student
 import com.google.gson.Gson
 import org.junit.Test
 import org.junit.Assert.assertEquals
