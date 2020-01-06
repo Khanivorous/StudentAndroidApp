@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.stdentandroidapp.viewmodels.SecondFragmentViewModel
 import com.example.studentandroidapp.R
 import com.example.studentandroidapp.databinding.FragmentSecondBinding
-import com.example.studentandroidapp.viewmodels.SecondFragmentViewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

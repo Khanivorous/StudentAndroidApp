@@ -14,7 +14,6 @@ import retrofit2.Response
 
 class FirstFragmentViewModel : ViewModel() {
 
-    // The current word
     private  val _name = MutableLiveData<String>()
     val name : LiveData<String>
         get() = _name
@@ -42,7 +41,7 @@ class FirstFragmentViewModel : ViewModel() {
     }
 
     private fun handleResults(student: Response<Student>) {
-        _name.value = student.body()?.name
+        _name.value = student.body()?.name ?: "Name does not exist"
     }
 
     private fun handleError(error: Throwable) {

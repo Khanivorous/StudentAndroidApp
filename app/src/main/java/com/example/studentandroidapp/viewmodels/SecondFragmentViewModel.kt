@@ -1,4 +1,4 @@
-package com.example.studentandroidapp.viewmodels
+package com.example.stdentandroidapp.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,7 +14,6 @@ import retrofit2.Response
 
 class SecondFragmentViewModel : ViewModel() {
 
-    // The current word
     private  val _name = MutableLiveData<String>()
     val name : LiveData<String>
         get() = _name
@@ -42,7 +41,7 @@ class SecondFragmentViewModel : ViewModel() {
     }
 
     private fun handleResults(student: Response<Student>) {
-        _name.value = student.body()?.name
+        _name.value = student.body()?.name ?: "Name does not exist"
     }
 
     private fun handleError(error: Throwable) {
