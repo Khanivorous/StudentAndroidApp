@@ -37,6 +37,7 @@ class FirstFragment : Fragment() {
 
         Log.i("FirstFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(FirstFragmentViewModel::class.java)
+        binding.firstViewModel = viewModel
 
         /** Setting up LiveData  observation relationship**/
         viewModel.name.observe(this.viewLifecycleOwner, Observer { studentName ->
@@ -49,10 +50,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonGetStudentIdOne.setOnClickListener {
-            viewModel.getFirstStudentsName()
-        }
 
         binding.buttonNext.setOnClickListener {
             val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment("From FirstFragment")

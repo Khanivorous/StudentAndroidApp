@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.stdentandroidapp.viewmodels.SecondFragmentViewModel
+import com.example.studentandroidapp.viewmodels.SecondFragmentViewModel
 import com.example.studentandroidapp.R
 import com.example.studentandroidapp.databinding.FragmentSecondBinding
 
@@ -40,6 +40,7 @@ class SecondFragment : Fragment() {
 
         Log.i("SecondFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
+        binding.secondViewModel = viewModel
 
         /** Setting up LiveData  observation relationship**/
         viewModel.name.observe(this.viewLifecycleOwner, Observer { studentName ->
@@ -50,10 +51,6 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonGetStudentIdTwo.setOnClickListener {
-            viewModel.getSecondStudentsName()
-        }
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
