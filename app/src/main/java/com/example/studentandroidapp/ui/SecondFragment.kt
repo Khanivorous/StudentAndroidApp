@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.studentandroidapp.viewmodels.SecondFragmentViewModel
 import com.example.studentandroidapp.R
 import com.example.studentandroidapp.databinding.FragmentSecondBinding
@@ -19,8 +18,6 @@ import com.example.studentandroidapp.databinding.FragmentSecondBinding
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment() {
-
-    private val args: SecondFragmentArgs by navArgs()
 
     private lateinit var viewModel: SecondFragmentViewModel
 
