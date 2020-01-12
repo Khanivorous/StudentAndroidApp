@@ -35,7 +35,7 @@ class SecondFragment : Fragment() {
             false
         )
 
-        //Use viewmodelproviders to give 1 instance of the viewmodel to the fragment
+        //Use ViewModelProvider to give 1 instance of the viewmodel to the fragment
         // to be used throughout the fragments lifecycle
         Log.i("SecondFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(SecondFragmentViewModel::class.java)
