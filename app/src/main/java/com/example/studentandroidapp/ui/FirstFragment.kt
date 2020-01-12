@@ -35,14 +35,15 @@ class FirstFragment : Fragment() {
             false
         )
 
+        //Use viewmodelproviders to give 1 instance of the viewmodel to the fragment
+        // to be used throughout the fragments lifecycle
         Log.i("FirstFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(FirstFragmentViewModel::class.java)
-        binding.firstViewModel = viewModel
 
-        /** Setting up LiveData  observation relationship**/
-        viewModel.name.observe(this.viewLifecycleOwner, Observer { studentName ->
-            binding.textviewFirst.text = studentName
-        })
+        //adds viewModel to databinding in layout xml
+        binding.firstViewModel = viewModel
+        //adds LiveData to databinding in layout xml
+        binding.lifecycleOwner = this
 
         return binding.root
 
