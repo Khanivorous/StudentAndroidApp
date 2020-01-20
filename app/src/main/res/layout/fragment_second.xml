@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{secondViewModel.name}"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/button_second"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +27,11 @@
 
         <Button
             android:id="@+id/button_second"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/previous"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +39,18 @@
 
         <Button
             android:id="@+id/button_get_student_id_two"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/GetStudentById2"
+            android:layout_marginTop="16dp"
             android:onClick="@{() -> secondViewModel.getSecondStudentsName()}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/GetStudentById2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_second" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_second" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

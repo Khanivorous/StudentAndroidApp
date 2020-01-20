@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="firstViewModel"
             type="com.example.studentandroidapp.viewmodels.FirstFragmentViewModel" />
@@ -19,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{firstViewModel.name}"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/button_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +28,12 @@
 
         <Button
             android:id="@+id/button_next"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +41,18 @@
 
         <Button
             android:id="@+id/button_get_student_id_one"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/GetStudentById1"
+            android:layout_marginTop="16dp"
             android:onClick="@{() -> firstViewModel.getFirstStudentsName()}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/GetStudentById1"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_first" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_next" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
